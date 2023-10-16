@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import top.yumik.core.designsystem.image.ScIcons
+import top.yumik.core.designsystem.preview.ScPreview
 import top.yumik.core.designsystem.preview.ThemePreviews
 import top.yumik.core.designsystem.theme.ScTheme
 
@@ -45,7 +46,7 @@ object ScIconButtonDefaults {
 @Composable
 @ThemePreviews
 fun ScIconButtonPreview() {
-    ScTheme {
+    ScPreview {
         ScIconToggleButton(
             checked = true,
             onCheckedChange = { },
@@ -59,7 +60,7 @@ fun ScIconButtonPreview() {
 @Composable
 @ThemePreviews
 fun ScIconButtonPreviewUnchecked() {
-    ScTheme {
+    ScPreview {
         ScIconToggleButton(
             checked = false,
             onCheckedChange = { },

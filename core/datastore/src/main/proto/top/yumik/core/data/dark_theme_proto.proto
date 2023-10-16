@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "top.yumik.core.datastore";
+option java_multiple_files = true;
+
+enum DarkThemeProto {
+  DARK_THEME_UNSPECIFIED = 0;
+  DARK_THEME_FOLLOW_SYSTEM = 1;
+  DARK_THEME_LIGHT = 2;
+  DARK_THEME_DARK = 3;
+}

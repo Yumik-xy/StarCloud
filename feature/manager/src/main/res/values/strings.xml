@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="manager_screen_user_avatar_description">用户头像</string>
+    <string name="manager_screen_user_vip">Vip.%1$s</string>
+    <string name="manager_screen_title_about_mine">关于星云</string>
+    <string name="manager_screen_about_mine_version_name">版本信息</string>
+    <string name="manager_screen_about_mine_detail">项目介绍</string>
+    <string name="manager_screen_about_mine_open_source_link">开源地址</string>
+    <string name="manager_screen_about_mine_jump_description">跳转</string>
+    <string name="manager_screen_logout_btn">退出登录</string>
+    <string name="manager_screen_logout_btn_confirm">确认</string>
+    <string name="manager_screen_logout_btn_cancel">取消</string>
+    <string name="manager_screen_logout_btn_title">提示</string>
+    <string name="manager_screen_logout_btn_content">确认退出登录吗？</string>
+    <string name="manager_screen_title_theme_setting">主题设置</string>
+    <string name="manager_screen_logout_nickname"><![CDATA[<点击登录>]]></string>
+</resources>

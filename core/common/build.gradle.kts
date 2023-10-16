@@ -16,4 +16,5 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.zxing)
     implementation(libs.coroutines.android)
+    implementation(libs.androidx.startup)
 }

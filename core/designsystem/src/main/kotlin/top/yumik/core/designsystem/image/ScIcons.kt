@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material.icons.outlined.Album
 import androidx.compose.material.icons.outlined.Category
@@ -34,5 +35,6 @@ object ScIcons {
     val MoreVert = Icons.Filled.MoreVert
     val Refresh = Icons.Filled.Refresh
     val Search = Icons.Filled.Search
+    val Warning = Icons.Filled.Warning
     val WifiOff = Icons.Filled.WifiOff
 }

@@ -20,6 +20,7 @@ dependencies {
     api(libs.compose.uiToolingPreview)
     api(libs.compose.foundation)
     api(libs.compose.foundationLayout)
+    api(libs.compose.material)
     api(libs.compose.material3)
     api(libs.compose.runtime)
     api(libs.compose.runtimeLivedata)

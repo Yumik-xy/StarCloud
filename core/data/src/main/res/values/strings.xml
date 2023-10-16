@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 颜色配置 Colors -->
+    <string name="color_default">默认</string>
+    <string name="color_blue">蓝色</string>
+    <string name="color_red">红色</string>
+    <string name="color_green">绿色</string>
+    <string name="color_yellow">黄色</string>
+
+    <!-- 主题配置 Themes -->
+    <string name="dark_theme_follow_system">跟随</string>
+    <string name="dark_theme_light">浅色</string>
+    <string name="dark_theme_dark">深色</string>
+</resources>

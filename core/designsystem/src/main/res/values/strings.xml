@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- 颜色配置 Colors -->
-    <string name="color_default">默认</string>
-    <string name="color_blue">蓝色</string>
-</resources>

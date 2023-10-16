@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="page_loading">页面加载中…</string>
+    <string name="guest_screen_login_title">登录体验完整功能</string>
+    <string name="guest_screen_login_btn">去登录</string>
+</resources>

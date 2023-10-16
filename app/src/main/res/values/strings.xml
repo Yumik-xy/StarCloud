@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StarCloud</string>
+    <string name="nac_config_title_category">乐库</string>
+    <string name="nac_config_title_music">音乐</string>
+    <string name="nac_config_title_manager">管理</string>
+    <string name="content_description_search">搜索</string>
 </resources>

@@ -1,1 +1,9 @@
-<resources></resources>
+<resources>
+    <string name="login_screen_qr_code_description">二维码</string>
+    <string name="login_screen_title">请使用网易云APP扫描二维码\n授权去登录星云应用</string>
+    <string name="login_screen_app_full_name">星云 StarCloud</string>
+    <string name="login_screen_toolbar_title">扫码登录</string>
+    <string name="login_screen_toolbar_navigation_description">返回</string>
+    <string name="login_screen_network_error">网络错误</string>
+    <string name="login_screen_network_error_description">网络错误</string>
+</resources>

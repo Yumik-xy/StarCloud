@@ -4,10 +4,8 @@ import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -18,7 +16,6 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.CircularProgressIndicator
@@ -27,12 +24,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.runBlocking
@@ -40,8 +37,9 @@ import top.yumik.core.common.qrcode.QRCode
 import top.yumik.core.common.result.Result
 import top.yumik.core.designsystem.component.ScTopAppBar
 import top.yumik.core.designsystem.image.ScIcons
-import top.yumik.core.designsystem.preview.ThemePreviews
-import top.yumik.core.designsystem.theme.ScTheme
+import top.yumik.core.designsystem.preview.DevicePreviews
+import top.yumik.core.designsystem.preview.ScPreview
+import top.yumik.core.designsystem.util.noRipperClickable
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -60,7 +58,7 @@ internal fun LoginScreen(
             )
         }
     ) { padding ->
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
@@ -69,67 +67,29 @@ internal fun LoginScreen(
                     WindowInsets
                         .safeDrawing
                         .only(WindowInsetsSides.Horizontal)
-                )
+                ),
+            contentAlignment = Alignment.Center
         ) {
-            if (maxHeight > 400.dp) {
-                PortraitQRCodeScanner(
-                    modifier = Modifier.fillMaxSize(),
-                    bitmap = uiState.bitmap
-                )
-            } else {
-                LandscapeQRCodeScanner(
-                    modifier = Modifier.fillMaxSize(),
-                    bitmap = uiState.bitmap
-                )
-            }
+            DisplayQRCodeBitmap(
+                bitmap = uiState.bitmap,
+                onRefreshQRCodeBitmap = onRefreshQRCodeBitmap
+            )
         }
-    }
-}
-
-@Composable
-private fun PortraitQRCodeScanner(
-    modifier: Modifier = Modifier,
-    bitmap: Result<Bitmap>
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        DisplayQRCodeBitmap(bitmap = bitmap)
-        Spacer(modifier = Modifier.height(48.dp))
-        HelperQRCodeBitmap()
-    }
-}
-
-@Composable
-private fun LandscapeQRCodeScanner(
-    modifier: Modifier = Modifier,
-    bitmap: Result<Bitmap>
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        DisplayQRCodeBitmap(bitmap = bitmap)
-        Spacer(modifier = Modifier.width(48.dp))
-        HelperQRCodeBitmap()
     }
 }
 
 @Composable
 private fun DisplayQRCodeBitmap(
     modifier: Modifier = Modifier,
-    bitmap: Result<Bitmap>
+    bitmap: Result<Bitmap>,
+    onRefreshQRCodeBitmap: () -> Unit
 ) {
     Column(
         modifier = modifier.widthIn(max = 288.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "请使用网易云APP扫描二维码\n" +
-                    "授权去登录星云应用",
+            text = stringResource(R.string.login_screen_title),
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center
         )
@@ -140,33 +100,35 @@ private fun DisplayQRCodeBitmap(
         ) {
             when (bitmap) {
                 is Result.Loading -> {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                 }
 
                 is Result.Success -> {
                     Image(
                         modifier = Modifier.fillMaxSize(),
-                        bitmap = runBlocking {
-                            QRCode.generate("https://www.baidu.com").asImageBitmap()
-                        },
-                        contentDescription = "二维码",
+                        bitmap = bitmap.value.asImageBitmap(),
+                        contentDescription = stringResource(R.string.login_screen_qr_code_description),
                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
                     )
                 }
 
                 is Result.Error -> {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .noRipperClickable(onClick = onRefreshQRCodeBitmap),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             imageVector = ScIcons.WifiOff,
-                            contentDescription = "网络错误"
+                            contentDescription = stringResource(R.string.login_screen_network_error_description)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "网络错误",
+                            text = stringResource(R.string.login_screen_network_error),
                             style = MaterialTheme.typography.labelSmall
                         )
                     }
@@ -175,37 +137,11 @@ private fun DisplayQRCodeBitmap(
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "星云 StarCloud",
+            text = stringResource(R.string.login_screen_app_full_name),
             style = MaterialTheme.typography.labelLarge,
             textAlign = TextAlign.Center
         )
-    }
-}
-
-@Composable
-private fun HelperQRCodeBitmap(
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "二维码失效或扫码失败",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center
-        )
-        TextButton(onClick = { /*TODO*/ }) {
-            Icon(
-                imageVector = ScIcons.Refresh,
-                contentDescription = "刷新二维码"
-            )
-            Spacer(modifier = Modifier.width(2.dp))
-            Text(
-                text = "刷新二维码",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 
@@ -213,20 +149,22 @@ private fun HelperQRCodeBitmap(
 @Composable
 private fun LoginTopAppBar(onNavigationClick: () -> Unit) {
     ScTopAppBar(
-        title = "扫码登录",
+        title = stringResource(R.string.login_screen_toolbar_title),
         navigationIcon = ScIcons.ArrowBack,
-        navigationIconContentDescription = "返回",
+        navigationIconContentDescription = stringResource(R.string.login_screen_toolbar_navigation_description),
         onNavigationClick = onNavigationClick
     )
 }
 
 @Composable
-@ThemePreviews
+@DevicePreviews
 private fun LoginScreenPreview() {
-    ScTheme {
+    ScPreview {
         LoginScreen(
             uiState = LoginState(
-                bitmap = Result.Error(Exception("NullPointException in LoginScreenPreview"))
+                bitmap = Result.Success(
+                    runBlocking { QRCode.generate("Star Cloud") }
+                )
             ),
             onRefreshQRCodeBitmap = { /*TODO*/ },
             onNavigationClick = { /*TODO*/ }

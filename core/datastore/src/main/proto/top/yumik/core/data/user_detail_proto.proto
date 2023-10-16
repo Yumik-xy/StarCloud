@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "top.yumik.core.datastore";
+option java_multiple_files = true;
+
+message UserDetailProto {
+  string cookie = 1;
+  uint32 userId = 2;
+  string nickname = 3;
+  string avatar_url = 4;
+  uint32 vip_type = 5;
+  uint32 level = 6;
+  uint32 fans = 7;
+  uint32 follows = 8;
+}

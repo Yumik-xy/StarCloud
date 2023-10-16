@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_screen_title_my_categories">我的歌单</string>
+    <string name="category_screen_category_cover">歌单封面</string>
+</resources>

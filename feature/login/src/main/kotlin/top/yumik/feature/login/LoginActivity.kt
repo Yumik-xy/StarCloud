@@ -1,8 +1,5 @@
 package top.yumik.feature.login
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,22 +19,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import top.yumik.core.designsystem.theme.ScTheme
+import top.yumik.core.common.intent.startActivity
+import top.yumik.core.designsystem.preview.ScPreview
 
 private const val TAG = "LoginActivity"
 
-@AndroidEntryPoint
-class LoginActivity : ComponentActivity() {
+fun navigateToLogin() = startActivity<LoginActivity>()
 
-    companion object {
-        fun startActivity(context: Context) {
-            val intent = Intent(context, LoginActivity::class.java)
-            if (context !is Activity) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            context.startActivity(intent)
-        }
-    }
+@AndroidEntryPoint
+internal class LoginActivity : ComponentActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
 
@@ -56,10 +46,22 @@ class LoginActivity : ComponentActivity() {
             }
         }
 
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.event.collect {
+                    when (it) {
+                        LoginEvent.Authenticated -> {
+                            finish()
+                        }
+                    }
+                }
+            }
+        }
+
         enableEdgeToEdge()
 
         setContent {
-            ScTheme {
+            ScPreview {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

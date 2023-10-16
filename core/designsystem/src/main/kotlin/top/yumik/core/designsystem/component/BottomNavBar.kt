@@ -17,8 +17,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import top.yumik.core.designsystem.image.ScIcons
+import top.yumik.core.designsystem.preview.ScPreview
 import top.yumik.core.designsystem.preview.ThemePreviews
-import top.yumik.core.designsystem.theme.ScTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,7 +95,7 @@ class ScBottomNavBarColors internal constructor(
 @Composable
 @ThemePreviews
 fun ScBottomNavBarUnSelectedPreview() {
-    ScTheme {
+    ScPreview {
         ScBottomNavBar {
             ScBottomNavBarItem(
                 selected = false,
@@ -103,7 +103,7 @@ fun ScBottomNavBarUnSelectedPreview() {
                 unselectedIcon = ScIcons.CategoryBorder,
                 selectedIcon = ScIcons.Category,
                 iconContentDescription = null,
-                label = "广场"
+                label = "乐库"
             )
             ScBottomNavBarItem(
                 selected = false,
@@ -119,7 +119,7 @@ fun ScBottomNavBarUnSelectedPreview() {
                 unselectedIcon = ScIcons.HomeBorder,
                 selectedIcon = ScIcons.Home,
                 iconContentDescription = null,
-                label = "账号"
+                label = "管理"
             )
         }
     }
@@ -129,7 +129,7 @@ fun ScBottomNavBarUnSelectedPreview() {
 @Composable
 @ThemePreviews
 fun ScBottomNavBarSelectedPreview() {
-    ScTheme {
+    ScPreview {
         ScBottomNavBar {
             ScBottomNavBarItem(
                 selected = true,
@@ -137,7 +137,7 @@ fun ScBottomNavBarSelectedPreview() {
                 unselectedIcon = ScIcons.CategoryBorder,
                 selectedIcon = ScIcons.Category,
                 iconContentDescription = null,
-                label = "广场"
+                label = "乐库"
             )
             ScBottomNavBarItem(
                 selected = true,
@@ -153,7 +153,7 @@ fun ScBottomNavBarSelectedPreview() {
                 unselectedIcon = ScIcons.HomeBorder,
                 selectedIcon = ScIcons.Home,
                 iconContentDescription = null,
-                label = "账号"
+                label = "管理"
             )
         }
     }

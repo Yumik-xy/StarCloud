@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "top.yumik.core.datastore";
+option java_multiple_files = true;
+
+import "top/yumik/core/data/brand_color_proto.proto";
+import "top/yumik/core/data/dark_theme_proto.proto";
+
+message UserPreferencesProto {
+  BrandColorProto brand_color = 1;
+  DarkThemeProto dark_theme = 2;
+}

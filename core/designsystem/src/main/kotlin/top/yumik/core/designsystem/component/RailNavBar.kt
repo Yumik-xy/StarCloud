@@ -3,6 +3,7 @@ package top.yumik.core.designsystem.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
@@ -13,13 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import top.yumik.core.designsystem.image.ScIcons
+import top.yumik.core.designsystem.preview.ScPreview
 import top.yumik.core.designsystem.preview.ThemePreviews
-import top.yumik.core.designsystem.theme.ScTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +36,11 @@ fun ScRailNavBar(
         contentColor = colors.contentColor
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.spacedBy(
+                space = 16.dp,
+                alignment = Alignment.CenterVertically
+            ),
             content = content
         )
     }
@@ -96,7 +102,7 @@ class ScRailNavBarColors internal constructor(
 @Composable
 @ThemePreviews
 fun ScRailNavBarUnSelectedPreview() {
-    ScTheme {
+    ScPreview {
         ScRailNavBar {
             ScRailNavBarItem(
                 selected = false,
@@ -130,7 +136,7 @@ fun ScRailNavBarUnSelectedPreview() {
 @Composable
 @ThemePreviews
 fun ScRailNavBarSelectedPreview() {
-    ScTheme {
+    ScPreview {
         ScRailNavBar {
             ScRailNavBarItem(
                 selected = true,

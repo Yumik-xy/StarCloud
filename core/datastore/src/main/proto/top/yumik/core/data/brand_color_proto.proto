@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "top.yumik.core.datastore";
+option java_multiple_files = true;
+
+enum BrandColorProto {
+  BRAND_COLOR_UNSPECIFIED = 0;
+  BRAND_COLOR_DEFAULT = 1;
+  BRAND_COLOR_BLUE = 2;
+  BRAND_COLOR_RED = 3;
+  BRAND_COLOR_GREEN = 4;
+  BRAND_COLOR_YELLOW = 5;
+}
